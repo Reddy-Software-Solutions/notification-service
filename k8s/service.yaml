@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-service
+  labels:
+    app: notificationservice
+spec:
+  type: ClusterIP
+  ports:
+    - name: app-port
+      port: 1323
+      targetPort: 1323
+      protocol: TCP
+  selector:
+     app: notificationservice

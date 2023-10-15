@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service
+  labels:
+    app: notificationservice
+spec:
+  replicas: 2
+  strategy:
+     type: RollingUpdate
+  selector:
+    matchLabels:
+      app: notificationservice
+  template:
+    metadata:
+      labels:
+        app: notificationservice
+    spec:
+      containers:
+        - name: notificationservice
+          image: mallireddy1998/notification-service:##TAG##
+          pullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              port: 1323
+              path: /actuator/health/liveness
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              port: {{ .Values.service.port }}
+              path: /actuator/health/readiness
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          #resources:
+          #  {{- toYaml .Values.resources | nindent 12 }}
+          ports:
+            - containerPort: 1323
