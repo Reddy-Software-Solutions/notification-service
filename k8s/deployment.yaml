@@ -22,13 +22,13 @@ spec:
           livenessProbe:
             httpGet:
               port: 1323
-              path: /actuator/health/liveness
+              path: /notification-service/v1/actuator/health/liveness
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               port: 1323
-              path: /actuator/health/readiness
+              path: /notification-service/v1/actuator/health/readiness
             initialDelaySeconds: 60
             periodSeconds: 10
           ports:
