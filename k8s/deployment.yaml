@@ -28,7 +28,7 @@ spec:
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              port: {{ .Values.service.port }}
+              port: 1323
               path: /actuator/health/readiness
             initialDelaySeconds: 60
             periodSeconds: 10
