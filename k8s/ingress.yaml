@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: notification-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt"
+spec:
+  tls:
+    - hosts:
+        - ecomweb.centralindia.cloudapp.azure.com
+      secretName: letsencrypt
+  rules:
+    - host: ecomweb.centralindia.cloudapp.azure.com
+      http:
+        paths:
+          - path: /notification-service/v1
+            pathType: Prefix
+            backend:
+              service:
+                name: notification-service
+                port:
+                  number: 1323
