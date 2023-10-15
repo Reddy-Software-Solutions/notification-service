@@ -19,7 +19,6 @@ spec:
       containers:
         - name: notificationservice
           image: mallireddy1998/notification-service:##TAG##
-          pullPolicy: Always
           livenessProbe:
             httpGet:
               port: 1323
